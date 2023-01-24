@@ -40,9 +40,13 @@ def create(coffee):
     """
     coffee_name = coffee.get("coffee_name", None)
     milk = coffee.get("milk", None)
-
-    # Does the drink already exist?
-    if coffee_name not in COFFEE and coffee_name is not None:
+    """
+    Generator expression inside the any() function to iterate over the values 
+    of the dictionary and check if the "milk" value of any of the inner dictionaries 
+    is equal to the provided value. If the any() function returns False, it means that the provided value was not found in any of the nested dictionaries, 
+    so the print statement will be executed.
+    """
+    if not any(milk_name['milk'] == milk for milk_name in COFFEE.values()):
         COFFEE[coffee_name] = {
             "coffee_name": coffee_name,
             "milk": milk,
@@ -51,12 +55,8 @@ def create(coffee):
         return make_response(
             "{coffee_name} successfully created".format(coffee_name=coffee_name), 201
         )
-
-    # Otherwise, they exist, that's an error
     else:
         abort(
             406,
-            "Coffe, {coffee_name}, already exists".format(coffee_name=coffee_name),
-        )
-
-# STUDENT: Create a post route that updates the milk value
+            "Milk, {milk}, already exists".format(milk=milk),
+        )      
