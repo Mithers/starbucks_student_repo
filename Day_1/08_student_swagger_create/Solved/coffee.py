@@ -44,7 +44,7 @@ def create(coffee):
     Generator expression inside the any() function to iterate over the values 
     of the dictionary and check if the "milk" value of any of the inner dictionaries 
     is equal to the provided value. If the any() function returns False, it means that the provided value was not found in any of the nested dictionaries, 
-    so the print statement will be executed.
+    so the create statement will be executed.
     """
     if not any(milk_name['milk'] == milk for milk_name in COFFEE.values()):
         COFFEE[coffee_name] = {
